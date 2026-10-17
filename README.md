@@ -428,36 +428,53 @@ Full table and known limits: [`docs/threat-model.md`](docs/threat-model.md).
 <table>
   <thead>
     <tr>
-      <th align="center">Member</th>
+      <th align="center">Team Member</th>
       <th>Role</th>
-      <th>Key contributions</th>
-      <th>GitHub</th>
+      <th>Key Responsibilities &amp; Contributions</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td align="center"><img src="https://github.com/RohaanAhmadQuadri.png" width="64" alt="" /><br/><b>Rohaan Ahmad Quadri</b></td>
-      <td>Frontend & Security Developer</td>
-      <td>Core frontend, firewall integration, backend refinement</td>
-      <td><a href="https://github.com/RohaanAhmadQuadri">@RohaanAhmadQuadri</a></td>
+      <td align="center" width="200"><a href="https://github.com/RohaanAhmadQuadri"><img src="https://github.com/RohaanAhmadQuadri.png" width="80" alt="Rohaan Ahmad Quadri" /></a><br/><b>Rohaan Ahmad Quadri</b><br/><a href="https://github.com/RohaanAhmadQuadri"><sub>@RohaanAhmadQuadri</sub></a></td>
+      <td width="170"><b>Frontend & Security Developer</b></td>
+      <td>
+        <ul>
+          <li>Developed the core frontend architecture and user interfaces</li>
+          <li>Implemented and integrated the firewall and security layers</li>
+          <li>Refined, optimized and debugged backend logic and endpoints</li>
+        </ul>
+      </td>
     </tr>
     <tr>
-      <td align="center"><img src="https://github.com/PiyushSingh256.png" width="64" alt="" /><br/><b>Piyush Singh</b></td>
-      <td>Backend & Security Testing</td>
-      <td>Backend logic, system stress-testing, crash diagnostics</td>
-      <td><a href="https://github.com/PiyushSingh256">@PiyushSingh256</a></td>
+      <td align="center" width="200"><a href="https://github.com/PiyushSingh256"><img src="https://github.com/PiyushSingh256.png" width="80" alt="Piyush Singh" /></a><br/><b>Piyush Singh</b><br/><a href="https://github.com/PiyushSingh256"><sub>@PiyushSingh256</sub></a></td>
+      <td width="170"><b>Backend & Security Testing</b></td>
+      <td>
+        <ul>
+          <li>Assisted in backend development and logic structuring</li>
+          <li>Performed stress-testing, penetration testing and crash analysis</li>
+          <li>Ensured system stability and fault tolerance under high load</li>
+        </ul>
+      </td>
     </tr>
     <tr>
-      <td align="center"><img src="https://github.com/UjjawalKr-01.png" width="64" alt="" /><br/><b>Ujjawal Kumar</b></td>
-      <td>Backend Developer</td>
-      <td>Server-side APIs, database & backend modules</td>
-      <td><a href="https://github.com/UjjawalKr-01">@UjjawalKr-01</a></td>
+      <td align="center" width="200"><a href="https://github.com/UjjawalKr-01"><img src="https://github.com/UjjawalKr-01.png" width="80" alt="Ujjawal Kumar" /></a><br/><b>Ujjawal Kumar</b><br/><a href="https://github.com/UjjawalKr-01"><sub>@UjjawalKr-01</sub></a></td>
+      <td width="170"><b>Backend Developer</b></td>
+      <td>
+        <ul>
+          <li>Co-developed backend modules and API services</li>
+          <li>Contributed to database handling and server-side logic integration</li>
+        </ul>
+      </td>
     </tr>
     <tr>
-      <td align="center"><b>Priyanshi</b></td>
-      <td>Frontend Developer</td>
-      <td>UI/UX development, frontend layouts & styling</td>
-      <td>—</td>
+      <td align="center" width="200"><b>Priyanshi</b></td>
+      <td width="170"><b>Frontend Developer</b></td>
+      <td>
+        <ul>
+          <li>Contributed to frontend design, UI layout structuring and component styling</li>
+          <li>Assisted in user experience and interface enhancements</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
 </table>
