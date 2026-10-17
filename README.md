@@ -425,52 +425,40 @@ Full table and known limits: [`docs/threat-model.md`](docs/threat-model.md).
 
 ## 👥 Team
 
-<!-- Replace the placeholder rows with your teammates. -->
+<!-- Add GitHub handles for Piyush, Ujjawal and Priyanshi when available. -->
 <table>
   <thead>
     <tr>
       <th align="center">Member</th>
       <th>Role</th>
+      <th>Key contributions</th>
       <th>GitHub</th>
-      <th>Contributions</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td align="center"><img src="https://github.com/RohaanAhmadQuadri.png" width="64" alt="" /><br/><b>Rohaan Ahmad Quadri</b></td>
-      <td>Team Lead · Full-stack</td>
+      <td align="center"><img src="https://github.com/RohaanAhmadQuadri.png" width="64" alt="" /><br/><b>Rohaan</b><br/><sub>Team Lead</sub></td>
+      <td>Frontend & Security Developer</td>
+      <td>Core frontend, firewall integration, backend refinement</td>
       <td><a href="https://github.com/RohaanAhmadQuadri">@RohaanAhmadQuadri</a></td>
-      <td>Architecture, identity provider backend, integration</td>
     </tr>
     <tr>
-      <td align="center"><b>Member Name</b></td>
-      <td>Backend & Security</td>
-      <td><a href="https://github.com/USERNAME">@USERNAME</a></td>
-      <td>WebAuthn / OIDC services, security test suite</td>
+      <td align="center"><b>Piyush</b></td>
+      <td>Backend & Security Testing</td>
+      <td>Backend logic, system stress-testing, crash diagnostics</td>
+      <td>—</td>
     </tr>
     <tr>
-      <td align="center"><b>Member Name</b></td>
-      <td>Frontend & UX</td>
-      <td><a href="https://github.com/USERNAME">@USERNAME</a></td>
-      <td>Kavach UI, assisted sign-in flow, dashboard</td>
+      <td align="center"><b>Ujjawal</b></td>
+      <td>Backend Developer</td>
+      <td>Server-side APIs, database & backend modules</td>
+      <td>—</td>
     </tr>
     <tr>
-      <td align="center"><b>Member Name</b></td>
-      <td>Integrations</td>
-      <td><a href="https://github.com/USERNAME">@USERNAME</a></td>
-      <td>College & Citizen demo portals, integration guide</td>
-    </tr>
-    <tr>
-      <td align="center"><b>Member Name</b></td>
-      <td>Red Team</td>
-      <td><a href="https://github.com/USERNAME">@USERNAME</a></td>
-      <td>Attack Lab, threat model, firewall hardening</td>
-    </tr>
-    <tr>
-      <td align="center"><b>Member Name</b></td>
-      <td>Documentation & Demo</td>
-      <td><a href="https://github.com/USERNAME">@USERNAME</a></td>
-      <td>Project report, demo script, presentation</td>
+      <td align="center"><b>Priyanshi</b></td>
+      <td>Frontend Developer</td>
+      <td>UI/UX development, frontend layouts & styling</td>
+      <td>—</td>
     </tr>
   </tbody>
 </table>
