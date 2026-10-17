@@ -6,7 +6,7 @@ Names used throughout (already filled in):
 | What | Value |
 |---|---|
 | Organization | `Vertexx1-SIH2026` |
-| Repository | `kavach` → `https://github.com/Vertexx1-SIH2026/kavach` |
+| Repository | `kavach` → `https://github.com/Vertexx1-SIH2026/Kavach` |
 | Org owner | `RohaanAhmadQuadri` (your GitHub username) |
 
 > Want a different repo name (e.g. `kavach-passwordless-idp`)? Replace `/kavach` after `Vertexx1-SIH2026` in
@@ -84,10 +84,10 @@ Then **Repo → Settings → Collaborators and teams → Add teams** and give ea
 
 ```bash
 gh auth login
-gh repo create Vertexx1-SIH2026/kavach --public \
+gh repo create Vertexx1-SIH2026/Kavach --public \
   --description "Passwordless sign-in for every website — FIDO2 passkeys + OpenID Connect"
-gh api -X PUT orgs/Vertexx1-SIH2026/teams/developers/repos/Vertexx1-SIH2026/kavach -f permission=push
-gh api -X PUT orgs/Vertexx1-SIH2026/teams/maintainers/repos/Vertexx1-SIH2026/kavach -f permission=admin
+gh api -X PUT orgs/Vertexx1-SIH2026/teams/developers/repos/Vertexx1-SIH2026/Kavach -f permission=push
+gh api -X PUT orgs/Vertexx1-SIH2026/teams/maintainers/repos/Vertexx1-SIH2026/Kavach -f permission=admin
 ```
 
 (`push` = Write, `maintain`, `admin`, `triage`, `pull` = Read. Teams must already exist.)
@@ -163,7 +163,7 @@ two OIDC demo portals, assisted sign-in, recovery, attack lab, security test sui
 ### 3.5 Link the remote and push
 
 ```bash
-git remote add origin https://github.com/Vertexx1-SIH2026/kavach.git
+git remote add origin https://github.com/Vertexx1-SIH2026/Kavach.git
 git push -u origin main
 
 # Integration branch for day-to-day work
@@ -256,7 +256,7 @@ Create `.github/CODEOWNERS` once the teams exist, then tick **Require review fro
 ### (Optional) Classic branch protection via `gh`
 
 ```bash
-gh api -X PUT repos/Vertexx1-SIH2026/kavach/branches/main/protection --input - <<'JSON'
+gh api -X PUT repos/Vertexx1-SIH2026/Kavach/branches/main/protection --input - <<'JSON'
 {
   "required_status_checks": {
     "strict": true,

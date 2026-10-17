@@ -7,7 +7,7 @@
 
 ### Passwordless sign-in for every website — with a safe way to help people who can't use a passkey.
 
-[![CI](https://github.com/Vertexx1-SIH2026/kavach/actions/workflows/ci.yml/badge.svg)](https://github.com/Vertexx1-SIH2026/kavach/actions/workflows/ci.yml)
+[![CI](https://github.com/Vertexx1-SIH2026/Kavach/actions/workflows/ci.yml/badge.svg)](https://github.com/Vertexx1-SIH2026/Kavach/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CyberCup 6.0](https://img.shields.io/badge/CyberCup_6.0-CC6--IC04-8A2BE2)](#)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -219,7 +219,7 @@ kavach/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Vertexx1-SIH2026/kavach.git
+git clone https://github.com/Vertexx1-SIH2026/Kavach.git
 cd kavach
 ```
 
