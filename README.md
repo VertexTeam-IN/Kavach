@@ -8,7 +8,7 @@
 ### Passwordless sign-in for every website — with a safe way to help people who can't use a passkey.
 
 [![CI](https://github.com/Vertexx1-SIH2026/Kavach/actions/workflows/ci.yml/badge.svg)](https://github.com/Vertexx1-SIH2026/Kavach/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![CyberCup 6.0](https://img.shields.io/badge/CyberCup_6.0-CC6--IC04-8A2BE2)](#)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -493,6 +493,6 @@ Pull requests are welcome. Branch from `develop`, use [Conventional Commits](htt
 
 ## 📄 License
 
-Released under the [MIT License](LICENSE).
+Proprietary — © 2026 Vertexx1-SIH2026. All rights reserved. Use is restricted to members of the organization; see [LICENSE](LICENSE).
 
 <div align="center"><sub>Built with 🛡️ for a passwordless, inclusive internet.</sub></div>
