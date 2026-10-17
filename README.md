@@ -425,7 +425,6 @@ Full table and known limits: [`docs/threat-model.md`](docs/threat-model.md).
 
 ## 👥 Team
 
-<!-- Add GitHub handles for Piyush, Ujjawal and Priyanshi when available. -->
 <table>
   <thead>
     <tr>
@@ -437,22 +436,22 @@ Full table and known limits: [`docs/threat-model.md`](docs/threat-model.md).
   </thead>
   <tbody>
     <tr>
-      <td align="center"><img src="https://github.com/RohaanAhmadQuadri.png" width="64" alt="" /><br/><b>Rohaan</b><br/><sub>Team Lead</sub></td>
+      <td align="center"><img src="https://github.com/RohaanAhmadQuadri.png" width="64" alt="" /><br/><b>Rohaan Ahmad Quadri</b></td>
       <td>Frontend & Security Developer</td>
       <td>Core frontend, firewall integration, backend refinement</td>
       <td><a href="https://github.com/RohaanAhmadQuadri">@RohaanAhmadQuadri</a></td>
     </tr>
     <tr>
-      <td align="center"><b>Piyush</b></td>
+      <td align="center"><img src="https://github.com/PiyushSingh256.png" width="64" alt="" /><br/><b>Piyush Singh</b></td>
       <td>Backend & Security Testing</td>
       <td>Backend logic, system stress-testing, crash diagnostics</td>
-      <td>—</td>
+      <td><a href="https://github.com/PiyushSingh256">@PiyushSingh256</a></td>
     </tr>
     <tr>
-      <td align="center"><b>Ujjawal</b></td>
+      <td align="center"><img src="https://github.com/UjjawalKr-01.png" width="64" alt="" /><br/><b>Ujjawal Kumar</b></td>
       <td>Backend Developer</td>
       <td>Server-side APIs, database & backend modules</td>
-      <td>—</td>
+      <td><a href="https://github.com/UjjawalKr-01">@UjjawalKr-01</a></td>
     </tr>
     <tr>
       <td align="center"><b>Priyanshi</b></td>
