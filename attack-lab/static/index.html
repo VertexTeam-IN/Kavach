@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f19">
+  <title>Kavach — Attack Lab</title>
+  <link rel="icon" href="/static/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Same tokens as frontend/app/globals.css + components/ui.jsx */
+    :root{
+      --bg:#0b0f19; --card:#111827; --raise:#1e293b; --line:#1e293b; --line2:#334155;
+      --text:#f8fafc; --text2:#cbd5e1; --muted:#94a3b8; --dim:#64748b;
+      --blue:#2563eb; --blue-h:#3b82f6; --blue-l:#60a5fa;
+      --green:#10b981; --red:#ef4444; --amber:#f59e0b; --violet:#a78bfa;
+      --display:"Space Grotesk","Manrope",system-ui,sans-serif;
+      --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      --mono:"DM Mono","Cascadia Code",Consolas,monospace;
+    }
+    *{box-sizing:border-box} [hidden]{display:none!important}
+    html,body{background:var(--bg);color:var(--text)}
+    body{margin:0;font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    ::selection{background:var(--blue);color:#fff}
+    :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+    code{font-family:var(--mono);font-size:.92em;color:var(--text2)}
+
+    /* header — mirrors SiteHeader */
+    header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(11,15,25,.9);backdrop-filter:blur(12px)}
+    .hwrap{max-width:1100px;margin:0 auto;height:54px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
+    .tile{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;border:1px solid #334155;background:rgba(30,41,59,.9)}
+    .wordmark{display:flex;flex-direction:column;line-height:1.15}
+    .wordmark b{font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
+    .wordmark span{font-size:10px;font-weight:500;color:var(--muted)}
+    .hlinks{display:flex;align-items:center;gap:22px}
+    .hlinks a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:color .15s}
+    .hlinks a:hover{color:#fff}
+    .demo{display:inline-flex;align-items:center;border-radius:999px;border:1px solid rgba(245,158,11,.3);background:rgba(245,158,11,.1);color:#fcd34d;padding:2px 10px;font-size:11px;font-weight:600;letter-spacing:.03em}
+
+    /* hero */
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    .hero{padding:40px 0 8px;animation:rise .5s cubic-bezier(.16,1,.3,1) both}
+    .eyebrow,.group{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+    .eyebrow::before,.group::before{content:"";height:1px;width:28px;background:var(--blue)}
+    h1{font-family:var(--display);font-size:30px;font-weight:700;letter-spacing:-.02em;margin:14px 0 8px;color:#fff}
+    .lead{font-size:14px;line-height:1.65;color:var(--muted);max-width:680px;margin:0}
+
+    /* alerts — mirrors Alert */
+    .status{margin-top:22px;border-radius:12px;border:1px solid;padding:11px 14px;font-size:12.5px;font-weight:500;line-height:1.6}
+    .status.ok{border-color:rgba(16,185,129,.3);background:rgba(2,44,34,.25);color:#a7f3d0}
+    .status.bad{border-color:rgba(239,68,68,.3);background:rgba(69,10,10,.25);color:#fecaca}
+    .status.info{border-color:#334155;background:rgba(30,41,59,.5);color:var(--text2)}
+    .status b{color:#fff}
+
+    .toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+    .legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    .legend > span{display:inline-flex;align-items:center;gap:6px}
+    .runall{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--muted)}
+    select{font:500 12px var(--sans);color:var(--text);background:#0f172a;border:1px solid #334155;border-radius:10px;padding:7px 9px;margin-left:6px;outline:none}
+    select:focus{border-color:var(--blue-h);box-shadow:0 0 0 3px rgba(59,130,246,.2)}
+
+    main{max-width:1100px;margin:0 auto 60px;padding:0 20px}
+    .group{margin-top:34px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;margin-top:14px}
+
+    /* cards — mirrors Card */
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 10px 15px -3px rgba(0,0,0,.25);transition:border-color .2s,box-shadow .2s;animation:rise .5s cubic-bezier(.16,1,.3,1) both}
+    .card:hover{border-color:#334155}
+    .card.live{border-color:rgba(59,130,246,.6);box-shadow:0 0 0 3px rgba(37,99,235,.2),0 10px 15px -3px rgba(0,0,0,.25)}
+    .card h3{margin:0;font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:-.01em;color:#fff}
+    .attacker{font-size:13px;line-height:1.55;color:var(--muted);margin:0}
+    .explain{font-size:12.5px;line-height:1.6;color:var(--text2);background:rgba(30,41,59,.5);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0}
+    .explain b{color:var(--blue-l);font-weight:700}
+    .meta{font-size:11px;color:var(--dim);line-height:1.6}
+    .meta code{color:var(--muted);font-size:10.5px}
+
+    /* buttons — mirrors Button variants */
+    .btns{display:flex;gap:8px;flex-wrap:wrap}
+    button{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 13px var(--sans);border-radius:12px;padding:9px 15px;cursor:pointer;border:1px solid transparent;transition:all .15s}
+    button:active{transform:scale(.99)}
+    .run{background:var(--blue);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+    .run:hover{background:var(--blue-h)}
+    .legit{background:var(--raise);border-color:#334155;color:#e2e8f0}
+    .legit:hover{background:#334155}
+    .mini{padding:4px 10px;font-size:11.5px;border-radius:9px;background:var(--raise);border-color:#334155;color:var(--text2)}
+    .mini:hover{background:#334155;color:#fff}
+    button:disabled{opacity:.5;cursor:not-allowed}
+
+    /* verdicts + pills — mirrors Badge tones */
+    .verdict{border-radius:12px;border:1px solid;padding:10px 12px;font-size:12.5px;font-weight:500;line-height:1.55}
+    .v-blocked{border-color:rgba(16,185,129,.3);background:rgba(2,44,34,.25);color:#a7f3d0}
+    .v-allowed{border-color:rgba(59,130,246,.3);background:rgba(23,37,84,.3);color:#bfdbfe}
+    .v-warn{border-color:rgba(239,68,68,.3);background:rgba(69,10,10,.25);color:#fecaca}
+    .v-run{border-color:rgba(245,158,11,.3);background:rgba(69,26,3,.25);color:#fde68a}
+    .pill{display:inline-flex;align-items:center;border-radius:999px;border:1px solid;padding:1px 9px;font-size:10.5px;font-weight:700;letter-spacing:.04em;margin-right:8px;vertical-align:1px}
+    .pill.blocked{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.12);color:#6ee7b7}
+    .pill.allowed{border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.12);color:#93c5fd}
+    .pill.warn{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.12);color:#fca5a5}
+
+    .who{display:inline-flex;align-items:center;border-radius:999px;border:1px solid;padding:0 8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;line-height:18px;white-space:nowrap}
+    .who.victim{color:#93c5fd;border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.1)}
+    .who.helper{color:#6ee7b7;border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.1)}
+    .who.attacker{color:#fca5a5;border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.1)}
+    .who.website{color:#c4b5fd;border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.1)}
+    .who.kavach{color:var(--muted);border-color:#334155;background:var(--raise)}
+
+    /* step player */
+    .player{border-top:1px solid var(--line);margin-top:2px;padding-top:12px;display:flex;flex-direction:column;gap:10px}
+    .phead{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+    .progress{height:3px;background:var(--raise);border-radius:3px;overflow:hidden}
+    .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--blue-l));transition:width .35s}
+    .steps{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+    .step{font-size:12.5px;border-left:2px solid #334155;padding:6px 0 6px 12px;animation:in .35s ease;color:var(--text2)}
+    .step.ok{border-color:var(--blue-h)} .step.blocked{border-color:var(--green)} .step.warn{border-color:var(--red)} .step.info{border-color:var(--amber)}
+    .step.current{background:rgba(37,99,235,.08);border-radius:0 10px 10px 0}
+    .step .t{font-weight:600;display:flex;gap:7px;align-items:center;flex-wrap:wrap;color:#e2e8f0}
+    .step .n{color:var(--dim);font-family:var(--mono);font-weight:500;min-width:16px}
+    .call{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:5px;word-break:break-all}
+    .code{display:inline-block;border-radius:6px;padding:0 6px;font-weight:500;border:1px solid}
+    .code.c2{color:#6ee7b7;border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.1)}
+    .code.c3{color:#fcd34d;border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.1)}
+    .code.c4,.code.c5{color:#fca5a5;border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.1)}
+    .tag{font-size:10.5px;font-weight:600;color:#6ee7b7;margin-left:6px;font-family:var(--sans)}
+    .note{color:var(--muted);margin-top:4px;line-height:1.5}
+    details{margin-top:5px} summary{cursor:pointer;color:var(--dim);font-size:11px;font-family:var(--mono)}
+    summary:hover{color:var(--muted)}
+    .step pre{background:#0b0f19;border:1px solid var(--line);color:#cbd5e1;border-radius:10px;padding:9px 10px;overflow:auto;font:11px/1.5 var(--mono);margin:6px 0 0;max-height:170px}
+
+    .footer{max-width:1100px;margin:0 auto;padding:22px 20px 40px;color:var(--dim);font-size:12px;line-height:1.7;border-top:1px solid var(--line)}
+    .footer code{color:var(--muted)}
+
+    @keyframes in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @media (max-width:640px){ .hlinks a{display:none} h1{font-size:24px} .grid{grid-template-columns:1fr} }
+    @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hwrap">
+      <a class="brand" href="http://localhost:3000" aria-label="Kavach home">
+        <span class="tile">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+            <path d="M12 2.8 5 5.6v5.6c0 4.5 3 8.4 7 9.9 4-1.5 7-5.4 7-9.9V5.6l-7-2.8Z" stroke="#3B82F6" stroke-width="2" stroke-linejoin="round"/>
+            <path d="m8.8 12.2 2.3 2.3 4.2-4.6" stroke="#60A5FA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="wordmark"><b>Kavach</b><span>Attack Lab</span></span>
+      </a>
+      <nav class="hlinks">
+        <a href="http://localhost:3000" target="_blank" rel="noopener">Kavach</a>
+        <a href="http://127.0.0.1:3001" target="_blank" rel="noopener">College Portal</a>
+        <a href="http://127.0.0.1:5000" target="_blank" rel="noopener">Citizen Portal</a>
+        <span class="demo">DEMO ONLY</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Security checks · live</div>
+      <h1>Try to break Kavach</h1>
+      <p class="lead">Each card is a real attack, sent as real HTTP to the running Kavach backend.
+        Watch it play out step by step: who acts, which request goes out and what Kavach answers.
+        Then click <b style="color:#fff">Do it legitimately</b> to see the same flow work when nothing is tampered with.</p>
+    </section>
+
+    <div id="status" class="status info">Checking Kavach…</div>
+    <div class="toolbar">
+      <div class="legend">
+        <span><span class="pill blocked">BLOCKED</span>attack refused</span>
+        <span><span class="pill allowed">ALLOWED</span>legit flow works</span>
+        <span><span class="pill warn">CHECK</span>look at the steps</span>
+        <span>
+          <span class="who victim">victim</span><span class="who helper">helper</span>
+          <span class="who attacker">attacker</span><span class="who website">website</span></span>
+      </div>
+      <div class="runall">
+        <label>Speed
+          <select id="speed">
+            <option value="1600">Slow (presenting)</option>
+            <option value="900" selected>Normal</option>
+            <option value="250">Fast</option>
+          </select>
+        </label>
+        <button id="runAll" class="run">▶ Run all attacks</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="main"></main>
+
+  <div class="footer">
+    Target: <code id="target"></code> · Browser-enforced phishing proof: open
+    <code>http://127.0.0.1:3000/login</code> on a different hostname — the browser itself refuses the passkey.
+    This lab demonstrates defences against the specific listed attacks; it does not prove the system is secure overall.
+  </div>
+
+<script>
+const $ = s => document.querySelector(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const delay = () => Number($('#speed').value);
+
+async function j(url, opts){ const r = await fetch(url, opts); return r.json(); }
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+const STATUS_TEXT = {200:'OK',302:'Redirect',303:'Redirect',400:'Bad Request',401:'Unauthorized',403:'Forbidden',404:'Not Found',429:'Too Many Requests'};
+
+function stepHTML(st, i){
+  const who = st.who || 'kavach';
+  let call = '';
+  if (st.call){
+    const c = Math.floor(st.status/100);
+    call = `<div class="call">${esc(st.call)} → <span class="code c${c}">${st.status} ${esc(STATUS_TEXT[st.status]||'')}</span>` +
+           (st.kind==='blocked' ? `<span class="tag">✓ defence held</span>` : '') + `</div>`;
+  }
+  let raw = '';
+  if (st.request !== undefined) raw += `<pre>→ request ${esc(JSON.stringify(st.request, null, 2))}</pre>`;
+  if (st.body !== undefined)    raw += `<pre>${esc(JSON.stringify(st.body, null, 2))}</pre>`;
+  const details = raw ? `<details><summary>show server response</summary>${raw}</details>` : '';
+  const note = st.note ? `<div class="note">${esc(st.note)}</div>` : '';
+  return `<li class="step ${st.kind||'info'}">
+            <div class="t"><span class="n">${i+1}.</span><span class="who ${esc(who)}">${esc(who)}</span>${esc(st.title)}</div>
+            ${call}${note}${details}
+          </li>`;
+}
+
+function verdictHTML(res){
+  const cls = res.outcome==='blocked'?'v-blocked':res.outcome==='allowed'?'v-allowed':'v-warn';
+  const pill = res.outcome==='blocked'?'blocked':res.outcome==='allowed'?'allowed':'warn';
+  const label = res.outcome==='blocked'?'BLOCKED':res.outcome==='allowed'?'ALLOWED':(res.outcome||'CHECK').toUpperCase();
+  return `<div class="verdict ${cls}"><span class="pill ${pill}">${label}</span>${esc(res.verdict||'')}</div>`;
+}
+
+// Plays a result back one step at a time. Each card keeps a token so Replay/Skip/new runs
+// cancel a playback that is still going.
+async function play(cardEl, res, instant=false){
+  const token = (cardEl._play = (cardEl._play||0) + 1);
+  const steps = res.steps || [];
+  const out = cardEl.querySelector('.out');
+  out.innerHTML = `
+    <div class="player">
+      <div class="phead"><span class="pos">Step 0 of ${steps.length}</span>
+        <span><button class="mini skip">Skip ⏭</button> <button class="mini replay" hidden>Replay ↺</button></span></div>
+      <div class="progress"><i></i></div>
+      <ol class="steps"></ol>
+      <div class="final"></div>
+    </div>`;
+  const list = out.querySelector('.steps'), pos = out.querySelector('.pos'), bar = out.querySelector('.progress i');
+  out.querySelector('.skip').onclick = () => play(cardEl, res, true);
+  out.querySelector('.replay').onclick = () => play(cardEl, res, false);
+
+  for (let i = 0; i < steps.length; i++){
+    if (cardEl._play !== token) return;
+    list.querySelectorAll('.current').forEach(e=>e.classList.remove('current'));
+    list.insertAdjacentHTML('beforeend', stepHTML(steps[i], i));
+    if (!instant) list.lastElementChild.classList.add('current');
+    pos.textContent = `Step ${i+1} of ${steps.length}`;
+    bar.style.width = `${((i+1)/steps.length)*100}%`;
+    if (!instant) await sleep(delay());
+  }
+  if (cardEl._play !== token) return;
+  list.querySelectorAll('.current').forEach(e=>e.classList.remove('current'));
+  pos.textContent = `Done in ${res.ms ?? '?'} ms · ${steps.length} step${steps.length===1?'':'s'}`;
+  out.querySelector('.final').innerHTML = verdictHTML(res);
+  out.querySelector('.skip').hidden = true;
+  out.querySelector('.replay').hidden = false;
+}
+
+async function act(cardEl, id, legit){
+  cardEl._play = (cardEl._play||0) + 1;        // cancel any playback in progress
+  cardEl.querySelectorAll('.btns button').forEach(b=>b.disabled=true);
+  cardEl.classList.add('live');
+  cardEl.querySelector('.out').innerHTML =
+    `<div class="verdict v-run">Sending real requests to Kavach… (${legit?'legitimate flow':'attack'})</div>`;
+  try{
+    const res = await j(`/api/${legit?'legit':'run'}/${id}`, {method:'POST'});
+    await play(cardEl, res);
+  }catch(e){
+    cardEl.querySelector('.out').innerHTML = `<div class="verdict v-warn">Lab error: ${esc(e)}</div>`;
+  }finally{
+    cardEl.querySelectorAll('.btns button').forEach(b=>b.disabled=false);
+    cardEl.classList.remove('live');
+  }
+}
+
+async function runAll(){
+  const btn = $('#runAll');
+  btn.disabled = true;
+  const cards = [...document.querySelectorAll('.card')];
+  try{
+    for (let i = 0; i < cards.length; i++){
+      btn.textContent = `Running ${i+1} of ${cards.length}…`;
+      cards[i].scrollIntoView({behavior:'smooth', block:'center'});
+      await act(cards[i], cards[i].dataset.id, false);
+      await sleep(delay());
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '▶ Run all attacks';
+  }
+}
+
+function cardHTML(c){
+  const legitBtn = c.has_legit ? `<button class="legit" data-legit="1">Do it legitimately</button>` : '';
+  return `
+    <div class="card" data-id="${esc(c.id)}">
+      <h3>${esc(c.title)}</h3>
+      <p class="attacker">${esc(c.attacker)}</p>
+      <p class="explain"><b>What this means:</b> ${esc(c.explain||'')}</p>
+      <div class="meta">Threat: ${esc(c.threat)} · Test: <code>${esc(c.test)}</code></div>
+      <div class="btns"><button class="run">Run attack</button>${legitBtn}</div>
+      <div class="out"></div>
+    </div>`;
+}
+
+async function boot(){
+  const meta = await j('/api/cards');
+  $('#target').textContent = meta.target;
+  const groups = {};
+  meta.cards.forEach(c => (groups[c.group] = groups[c.group]||[]).push(c));
+  let html = '';
+  for (const g in groups){
+    html += `<div class="group">${esc(g)}</div><div class="grid">${groups[g].map(cardHTML).join('')}</div>`;
+  }
+  $('#main').innerHTML = html;
+  document.querySelectorAll('.card').forEach(cardEl=>{
+    const id = cardEl.dataset.id;
+    cardEl.querySelector('.run').onclick = ()=>act(cardEl, id, false);
+    const lb = cardEl.querySelector('[data-legit]');
+    if (lb) lb.onclick = ()=>act(cardEl, id, true);
+  });
+  $('#runAll').onclick = runAll;
+
+  const st = await j('/api/scenario');
+  const el = $('#status');
+  if (st.error){ el.className='status bad'; el.textContent = st.error; }
+  else if (st.ready){
+    el.className='status ok';
+    el.innerHTML = `Kavach reached. Demo users ready — <span class="who victim">victim</span> <b>${esc(st.victim)}</b>,
+      <span class="who helper">helper</span> <b>${esc(st.helper)}</b>, <span class="who attacker">attacker</span> <b>${esc(st.attacker)}</b>.
+      Click any <b>Run attack</b>, or <b>Run all</b> for a guided walkthrough.`;
+  } else { el.className='status info'; el.textContent='Setting up demo users…'; }
+}
+boot();
+</script>
+</body>
+</html>

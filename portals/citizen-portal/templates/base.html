@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}National Citizen Services Portal{% endblock %} · Kavach OIDC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0b0f19',
+            panel: '#0f1523',
+            line: '#1e293b',
+            brand: '#2563eb',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .panel { @apply rounded-lg border border-line bg-panel; }
+      .panel-head { @apply flex flex-wrap items-start justify-between gap-3 border-b border-line px-5 py-4; }
+      .panel-title { @apply text-sm font-semibold text-slate-100; }
+      .panel-sub { @apply mt-0.5 text-xs text-slate-500; }
+      .btn { @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition cursor-pointer; }
+      .btn-primary { @apply btn bg-blue-600 text-white hover:bg-blue-500; }
+      .btn-secondary { @apply btn border border-slate-700 bg-slate-800/60 text-slate-200 hover:bg-slate-800; }
+      .btn-ghost { @apply btn text-slate-400 hover:bg-slate-800 hover:text-slate-100; }
+      .link { @apply text-xs font-medium text-blue-400 hover:text-blue-300 cursor-pointer; }
+      .tag { @apply inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-medium; }
+      .tag-default { @apply tag bg-slate-800 text-slate-300; }
+      .tag-ok { @apply tag bg-emerald-500/10 text-emerald-300; }
+      .tag-warn { @apply tag bg-amber-500/10 text-amber-300; }
+      .tag-info { @apply tag bg-blue-500/10 text-blue-300; }
+      .tag-bad { @apply tag bg-red-500/10 text-red-300; }
+      .icon-box { @apply grid h-8 w-8 shrink-0 place-items-center rounded-md border border-line text-slate-400; }
+    }
+  </style>
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  </style>
+</head>
+<body class="flex min-h-screen flex-col bg-ink text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+  <!-- Thin national colour band -->
+  <div class="flex h-[3px] w-full" aria-hidden="true">
+    <span class="flex-1 bg-orange-500/80"></span><span class="flex-1 bg-slate-200/80"></span><span class="flex-1 bg-green-600/80"></span>
+  </div>
+
+  <header class="border-b border-line bg-ink">
+    <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <a href="{{ url_for('index') }}" class="flex items-center gap-3">
+        <span class="grid h-8 w-8 place-items-center rounded-md border border-slate-700 bg-slate-800/80">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 text-slate-200" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10h18M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18M12 3 3 8h18l-9-5Z"/>
+          </svg>
+        </span>
+        <div class="leading-tight">
+          <p class="text-sm font-semibold text-slate-100">National Citizen Portal</p>
+          <p class="text-[11px] text-slate-500">Ministry of Digital Governance</p>
+        </div>
+      </a>
+      <div class="flex items-center gap-3">
+        {% block header_right %}
+        <span class="hidden text-xs text-slate-500 sm:inline">Sign-in by Kavach</span>
+        {% endblock %}
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-10">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="border-t border-line py-5 text-xs text-slate-500">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 sm:flex-row sm:px-6">
+      <p>© 2026 National Citizen Digital Services Portal</p>
+      <p>OpenID Connect client · Kavach passkey sign-in</p>
+    </div>
+  </footer>
+</body>
+</html>

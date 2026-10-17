@@ -1,0 +1,65 @@
+{
+  // Kavach (+ Attack Lab) — run everything inside VS Code, one terminal tab per app.
+  //   Ctrl+Shift+P → "Tasks: Run Task" → "Start Kavach"     (or Ctrl+Shift+B)
+  //   Stop:  Ctrl+Shift+P → "Tasks: Terminate Task" → "All Running Tasks"
+  // Open THIS folder (kavach - Copy\kavach) in VS Code so ${workspaceFolder} points here.
+  // The Attack Lab page is at http://localhost:3000/lab (needs KAVACH_ENABLE_LAB=1 in frontend\.env.local).
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Kavach",
+      "dependsOn": ["Kavach API :8000", "Kavach UI :3000", "College Portal :3001", "Citizen Portal :5000", "Attack Lab :4000"],
+      "dependsOrder": "parallel",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Kavach API :8000",
+      "type": "process",
+      "command": "${workspaceFolder}\\backend\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "uvicorn", "app.main:app", "--reload", "--no-proxy-headers", "--host", "127.0.0.1", "--port", "8000"],
+      "options": { "cwd": "${workspaceFolder}\\backend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "always" }
+    },
+    {
+      "label": "Kavach UI :3000",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}\\frontend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "always" }
+    },
+    {
+      "label": "College Portal :3001",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}\\portals\\college-portal" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "silent" }
+    },
+    {
+      "label": "Citizen Portal :5000",
+      "type": "process",
+      "command": "${workspaceFolder}\\portals\\citizen-portal\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "flask", "--app", "app", "run", "-h", "127.0.0.1", "-p", "5000"],
+      "options": { "cwd": "${workspaceFolder}\\portals\\citizen-portal" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "silent" }
+    },
+    {
+      "label": "Attack Lab :4000",
+      "type": "process",
+      "command": "${workspaceFolder}\\backend\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "uvicorn", "lab:app", "--host", "127.0.0.1", "--port", "4000"],
+      "options": { "cwd": "${workspaceFolder}\\attack-lab" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "silent" }
+    }
+  ]
+}

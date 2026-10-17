@@ -1,0 +1,849 @@
+/* Landing page — split white / ink layout with an interactive 3D stage on the dark side. */
+
+.shell {
+  --ink: #0b0f19;
+  --muted: #64748b;
+  --orange: #2563eb;
+  --display: var(--kv-display), sans-serif;
+  --mono: var(--kv-mono), monospace;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(90deg, #0b0f19 0%, #0b0f19 62%, #080c14 62%, #080c14 100%);
+  color: #f8fafc;
+}
+
+/* ---------------------------------------------------------------- header */
+.header {
+  height: 64px;
+  padding: 0 clamp(20px, 4.5vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  animation: slideDown 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: clamp(17px, 3vw, 43px);
+}
+.nav a {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  transition:
+    color 0.25s,
+    transform 0.25s;
+}
+.nav a:hover {
+  color: var(--orange);
+  transform: translateY(-2px);
+}
+.headerActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 11px;
+}
+.headerLink {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #ffffff28;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #e7e7e8;
+  font-size: 11px;
+  font-weight: 800;
+  transition: 0.25s;
+}
+.headerLink:hover,
+.headerCta:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--ink);
+}
+.headerCta {
+  border: 1px solid #ffffff24;
+  background: #ffffff0b;
+  color: #fff;
+  padding: 12px 17px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1px;
+  transition: 0.25s;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- hero */
+.hero {
+  min-height: calc(100vh - 64px);
+  position: relative;
+  display: grid;
+  grid-template-columns: 43% 57%;
+  align-items: center;
+  padding: 25px clamp(22px, 5.3vw, 88px) 76px;
+}
+.copy {
+  position: relative;
+  z-index: 4;
+  max-width: 540px;
+  padding-top: 7px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--muted);
+  font: 11px var(--mono);
+  letter-spacing: 1.8px;
+  margin-bottom: 25px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.2s forwards;
+}
+.eyebrowLine {
+  height: 1px;
+  width: 35px;
+  background: var(--orange);
+}
+.title {
+  font-family: var(--display);
+  font-size: clamp(44px, 5.8vw, 84px);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #ffffff;
+}
+.title span {
+  display: block;
+  opacity: 0;
+  transform: translateY(22px);
+  animation: lineIn 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.accent {
+  color: var(--orange);
+}
+.bottom {
+  margin-top: 31px;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.85s forwards;
+}
+.serviceLink {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  color: #cbd5e1;
+}
+.serviceLink span {
+  font-size: 16px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+.serviceLink:hover span {
+  transform: translateY(3px);
+  color: var(--orange);
+}
+.mainCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 19px;
+  background: var(--orange);
+  color: #ffffff;
+  padding: 7px 8px 7px 19px;
+  min-height: 52px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  box-shadow: 0 9px 22px #2563eb25;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+.mainCta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px #2563eb40;
+}
+.arrowDisc {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--ink);
+  color: var(--orange);
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  line-height: 1;
+}
+.note {
+  margin-top: 34px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 440px;
+  opacity: 0;
+  animation: fadeUp 0.7s 1s forwards;
+}
+.note a {
+  color: #60a5fa;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-underline-offset: 3px;
+}
+.noteDot {
+  width: 7px;
+  height: 7px;
+  background: var(--orange);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px #2563eb19;
+  flex: none;
+}
+
+/* ---------------------------------------------------------------- 3D stage */
+.stage {
+  position: absolute;
+  inset: 0 0 0 35%;
+  z-index: 2;
+}
+.stage::before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 80%;
+  right: -8%;
+  top: 7%;
+  background: radial-gradient(ellipse at 45% 45%, #303136 0%, #18191c00 69%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+.label {
+  position: absolute;
+  font: 9px var(--mono);
+  letter-spacing: 1.5px;
+  color: #ffffff70;
+  z-index: 3;
+  pointer-events: none;
+}
+.labelTop {
+  top: 9%;
+  right: 8%;
+}
+.labelBottom {
+  bottom: 12%;
+  right: 9%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.labelBottom::before {
+  content: "";
+  height: 1px;
+  width: 24px;
+  background: var(--orange);
+}
+.glass {
+  position: absolute;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 15px;
+  color: #fff;
+  box-shadow: 0 22px 50px #00000016;
+  transition:
+    border-color 0.3s,
+    transform 0.15s ease-out;
+}
+.glass:hover {
+  border-color: #ff8c3877;
+}
+.signinCard {
+  right: 5.5%;
+  top: 19%;
+  width: 215px;
+  padding: 17px 17px 15px;
+  animation: floatCard 6s ease-in-out infinite;
+}
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.cardLabel {
+  font: 9px var(--mono);
+  letter-spacing: 1.1px;
+  color: #ffffff8a;
+  text-transform: uppercase;
+}
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 8px var(--mono);
+  color: #b9efcf;
+}
+.pill::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #75e4a1;
+  box-shadow: 0 0 8px #75e4a1;
+}
+.pillOff {
+  color: #f6b3a8;
+}
+.pillOff::before {
+  background: #f07a66;
+  box-shadow: 0 0 8px #f07a66;
+}
+.bigNumber {
+  font-family: var(--display);
+  font-size: 29px;
+  letter-spacing: -1.7px;
+  margin: 14px 0 1px;
+}
+.bigNumber small {
+  display: block;
+  font: 10px var(--mono);
+  color: #80dfa3;
+  letter-spacing: 0.4px;
+  margin-top: 4px;
+}
+.cardSub {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #ffffff8c;
+  min-height: 30px;
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+.flowStep {
+  border-top: 2px solid var(--orange);
+  padding-top: 6px;
+  font: 8px var(--mono);
+  letter-spacing: 0.6px;
+  color: #ffffffa8;
+  text-transform: uppercase;
+}
+.flowStep b {
+  display: block;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.flowStep {
+  border-top-color: #ffffff2a;
+  transition:
+    border-color 0.4s,
+    color 0.4s;
+}
+.flowActive {
+  border-top-color: var(--orange);
+  color: #fff;
+}
+.cardLink {
+  display: inline-block;
+  margin-top: 14px;
+  font: 9px var(--mono);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.cardLink:hover {
+  text-decoration: underline;
+}
+.fixLink {
+  font: 9px var(--mono);
+  color: var(--orange);
+}
+.bad {
+  color: #f6b3a8 !important;
+}
+.track span.trackBad {
+  width: 30%;
+  background: #f07a66;
+}
+.statusCard {
+  left: 12%;
+  bottom: 16%;
+  width: 200px;
+  padding: 16px 17px;
+  /* This card can overlap the white half, so it uses dark glass to stay legible on both. */
+  background: rgba(24, 25, 28, 0.86);
+  border-color: rgba(255, 255, 255, 0.1);
+  animation: floatCard 7s ease-in-out -2s infinite;
+}
+.statusHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.statusCheck {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #ff8c3822;
+  color: var(--orange);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+}
+.statusList {
+  display: grid;
+  gap: 11px;
+}
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9.5px;
+  color: #ffffffb8;
+}
+.statusRow strong {
+  font: 9px var(--mono);
+  color: #8de0ad;
+}
+.track {
+  height: 3px;
+  background: #ffffff16;
+  border-radius: 4px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.track span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  background: var(--orange);
+}
+.chip {
+  position: absolute;
+  z-index: 4;
+  right: 14%;
+  bottom: 12%;
+  color: #ffffff90;
+  font: 9px var(--mono);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  pointer-events: none;
+}
+.chip b {
+  color: var(--orange);
+  font-weight: 400;
+}
+.scrollCue {
+  position: absolute;
+  left: clamp(22px, 5.3vw, 88px);
+  bottom: 25px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 9px var(--mono);
+  letter-spacing: 1.4px;
+  color: #a3a5aa;
+}
+.scrollLine {
+  height: 1px;
+  width: 32px;
+  background: #c8c9cb;
+}
+.index {
+  position: absolute;
+  right: clamp(22px, 5.3vw, 88px);
+  bottom: 25px;
+  color: #ffffff65;
+  font: 9px var(--mono);
+  letter-spacing: 1.3px;
+  z-index: 4;
+}
+.index b {
+  color: var(--orange);
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------------- sections below the hero */
+.section {
+  padding: 110px clamp(22px, 5.3vw, 88px);
+  background: #0f172a;
+  color: #f8fafc;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sectionHead {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+.sectionTitle {
+  font-family: var(--display);
+  font-size: clamp(34px, 4.4vw, 62px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 18px 0 0;
+  color: #ffffff;
+}
+.sectionLead {
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 440px;
+  justify-self: end;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.step {
+  padding: 30px 30px 10px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.step + .step {
+  padding-left: 30px;
+}
+.step:last-child {
+  border-right: none;
+}
+.stepNum {
+  font: 11px var(--mono);
+  letter-spacing: 1.6px;
+  color: var(--orange);
+}
+.stepTitle {
+  font-family: var(--display);
+  font-size: 23px;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  margin: 18px 0 10px;
+  color: #ffffff;
+}
+.stepText {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.band {
+  background: #080c14;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 90px clamp(22px, 5.3vw, 88px);
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+.bandTitle {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.8vw, 54px);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 18px 0 0;
+}
+.bandText {
+  color: #ffffffa8;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.bandLinks {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ghostBtn {
+  border: 1px solid #ffffff30;
+  color: #fff;
+  border-radius: 12px;
+  padding: 0 18px;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  transition: 0.25s;
+}
+.ghostBtn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.footer {
+  background: var(--ink);
+  border-top: 1px solid #ffffff14;
+  color: #ffffff60;
+  padding: 26px clamp(22px, 5.3vw, 88px);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font: 10px var(--mono);
+  letter-spacing: 1.2px;
+  flex-wrap: wrap;
+}
+
+/* ---------------------------------------------------------------- motion */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lineIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes floatCard {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+/* ---------------------------------------------------------------- responsive */
+@media (min-width: 1500px) {
+  .hero {
+    padding-top: 35px;
+  }
+  .stage {
+    left: 32%;
+  }
+  .signinCard {
+    right: 9%;
+    top: 18%;
+    width: 230px;
+  }
+  .statusCard {
+    left: 17%;
+    bottom: 15%;
+  }
+}
+@media (max-width: 1050px) {
+  /* Stack instead of splitting the background at a fixed height: headline on white, then a dark
+     3D block. Works for any window height (landscape laptops, phones, tablets). */
+  .shell {
+    background: #fff;
+  }
+  .stage {
+    position: relative;
+    inset: auto;
+    height: 600px;
+    margin: 44px calc(-1 * clamp(22px, 5.3vw, 88px)) 0;
+    background: var(--ink);
+  }
+  .header {
+    grid-template-columns: 1fr auto;
+    height: 78px;
+  }
+  .nav {
+    display: none;
+  }
+  /* The header now sits on the white half: switch its buttons to dark-on-light. */
+  .headerLink {
+    color: var(--ink);
+    border-color: #18191c26;
+  }
+  .headerCta {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .hero {
+    min-height: 0;
+    display: block;
+    padding-top: 34px;
+    padding-bottom: 0;
+  }
+  .copy {
+    max-width: 520px;
+  }
+  .title {
+    font-size: clamp(50px, 8.3vw, 82px);
+  }
+  .stage::before {
+    width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+  }
+  .signinCard {
+    right: 6%;
+    top: 21%;
+    width: 195px;
+  }
+  .statusCard {
+    left: 6%;
+    bottom: 13%;
+  }
+  .chip {
+    right: 8%;
+    bottom: 9%;
+  }
+  .scrollCue {
+    display: none;
+  }
+  .index {
+    bottom: 18px;
+  }
+  .sectionHead,
+  .band {
+    grid-template-columns: 1fr;
+  }
+  .sectionLead {
+    justify-self: start;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+  }
+  .step,
+  .step + .step {
+    padding: 26px 0;
+    border-right: none;
+    border-bottom: 1px solid #18191c1f;
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    height: 72px;
+    padding: 0 20px;
+  }
+  .headerLink {
+    display: none;
+  }
+  .headerCta {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+  .hero {
+    padding: 32px 22px 0;
+  }
+  .eyebrow {
+    margin-bottom: 20px;
+    font-size: 10px;
+  }
+  .title {
+    font-size: clamp(46px, 13vw, 77px);
+    line-height: 0.9;
+  }
+  .bottom {
+    gap: 14px;
+    margin-top: 25px;
+  }
+  .mainCta {
+    min-height: 47px;
+    padding: 6px 7px 6px 13px;
+    gap: 12px;
+    font-size: 10px;
+  }
+  .note {
+    margin-top: 19px;
+    max-width: 290px;
+  }
+  .stage {
+    height: 540px;
+    margin: 36px -22px 0;
+  }
+  .stage::before {
+    width: 130%;
+    height: 90%;
+    right: -15%;
+    top: 5%;
+  }
+  .signinCard {
+    right: 7%;
+    top: 14%;
+    width: 170px;
+    padding: 13px;
+  }
+  .bigNumber {
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  .statusCard {
+    left: 7%;
+    bottom: 13%;
+    width: 172px;
+    padding: 13px;
+  }
+  .statusList {
+    gap: 8px;
+  }
+  .chip {
+    right: 9%;
+    bottom: 7%;
+    font-size: 8px;
+  }
+  .labelTop {
+    top: 6%;
+    font-size: 8px;
+  }
+  .labelBottom {
+    bottom: 3%;
+    font-size: 8px;
+  }
+  .index {
+    right: 22px;
+    bottom: 16px;
+  }
+  .section {
+    padding: 80px 22px;
+  }
+  .band {
+    padding: 70px 22px;
+  }
+}

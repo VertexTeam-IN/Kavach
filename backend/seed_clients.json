@@ -1,0 +1,20 @@
+[
+  {
+    "client_id": "college-portal",
+    "name": "College Portal",
+    "client_secret": "college-portal-dev-secret",
+    "redirect_uris": ["http://127.0.0.1:3001/api/auth/callback"],
+    "post_logout_redirect_uris": ["http://127.0.0.1:3001/"],
+    "scopes": ["openid", "profile"],
+    "allow_assisted": true
+  },
+  {
+    "client_id": "citizen-portal",
+    "name": "Citizen Services Portal",
+    "client_secret": "citizen-portal-dev-secret",
+    "redirect_uris": ["http://127.0.0.1:5000/callback"],
+    "post_logout_redirect_uris": ["http://127.0.0.1:5000/"],
+    "scopes": ["openid", "profile"],
+    "allow_assisted": false
+  }
+]

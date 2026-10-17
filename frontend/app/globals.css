@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/*
+ * Kavach design tokens — Clean, Professional Enterprise Cybersecurity Design.
+ * Inspired by Cloudflare, 1Password, and Apple Security.
+ */
+@theme {
+  --color-ink: #0b0f19;
+  --color-ink-2: #1e293b;
+  --color-slate: #64748b;
+  --color-mist: #f8fafc;
+  --color-line: #1e293b;
+  --color-orange: #2563eb;
+  --color-amber: #f59e0b;
+  --color-amber-dark: #d97706;
+  --color-teal: #2563eb;
+  --color-teal-soft: #eff6ff;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-danger-soft: #fef2f2;
+
+  --font-sans: var(--kv-body), system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: var(--kv-display), var(--kv-body), system-ui, sans-serif;
+  --font-mono: var(--kv-mono), "Cascadia Code", Consolas, monospace;
+}
+
+html,
+body {
+  background: #0b0f19;
+  color: #f8fafc;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Small mono eyebrow labels */
+.kv-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+.kv-eyebrow::before {
+  content: "";
+  height: 1px;
+  width: 28px;
+  background: #2563eb;
+}
+
+@keyframes kv-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.kv-rise {
+  animation: kv-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Professional Shell theme */
+.cyber-shell {
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-mist: #111827;
+}
+.cyber-shell .text-ink {
+  color: #f8fafc;
+}
+.cyber-shell .text-slate {
+  color: #94a3b8;
+}
+.cyber-shell .divide-line > * + * {
+  border-color: rgba(255, 255, 255, 0.07);
+}
+.cyber-shell .border-line {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

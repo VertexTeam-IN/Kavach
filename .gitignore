@@ -1,0 +1,40 @@
+# ── Secrets & local config ──────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+backend/keys/
+
+# ── Python ──────────────────────────────────────────────
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# ── Node / Next.js ──────────────────────────────────────
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+npm-debug.log*
+
+# ── Build output ────────────────────────────────────────
+dist/
+build/
+
+# ── OS / editor / tools ─────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+*.log

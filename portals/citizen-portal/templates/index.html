@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mx-auto grid max-w-5xl items-start gap-10 md:grid-cols-[1.15fr_1fr] md:pt-6">
+  <!-- Left: service overview -->
+  <div>
+    <p class="text-xs font-medium uppercase tracking-wider text-slate-500">Digital public services</p>
+    <h1 class="mt-2 text-2xl font-semibold tracking-tight text-slate-50 sm:text-3xl">
+      One sign-in for all citizen services
+    </h1>
+    <p class="mt-3 max-w-lg text-sm leading-relaxed text-slate-400">
+      Access welfare schemes, utility payments, municipal taxes and official certificates using your
+      device-bound Kavach passkey.
+    </p>
+
+    <dl class="mt-8 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
+      <div class="bg-panel p-4">
+        <dt class="text-sm font-medium text-slate-200">e-Certificates</dt>
+        <dd class="mt-1 text-xs text-slate-500">Income, domicile and caste records</dd>
+      </div>
+      <div class="bg-panel p-4">
+        <dt class="text-sm font-medium text-slate-200">Utility payments</dt>
+        <dd class="mt-1 text-xs text-slate-500">Electricity, water and gas bills</dd>
+      </div>
+      <div class="bg-panel p-4">
+        <dt class="text-sm font-medium text-slate-200">Property records</dt>
+        <dd class="mt-1 text-xs text-slate-500">Municipal tax and title deeds</dd>
+      </div>
+      <div class="bg-panel p-4">
+        <dt class="text-sm font-medium text-slate-200">FIDO2 security</dt>
+        <dd class="mt-1 text-xs text-slate-500">Phishing-resistant, passwordless sign-in</dd>
+      </div>
+    </dl>
+  </div>
+
+  <!-- Right: sign-in -->
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <h2 class="panel-title">Citizen sign-in</h2>
+        <p class="panel-sub">OpenID Connect with PKCE</p>
+      </div>
+    </div>
+
+    <div class="space-y-5 p-5">
+      {% if error %}
+      <div role="alert" class="relative overflow-hidden rounded-md border border-red-500/30 bg-red-500/5 py-2.5 pl-4 pr-3 text-xs text-red-200">
+        <span class="absolute inset-y-0 left-0 w-0.5 bg-red-500"></span>
+        {{ error }}
+      </div>
+      {% endif %}
+
+      {% if user %}
+      <div class="rounded-md border border-line bg-ink/60 p-4">
+        <p class="text-xs text-slate-500">Signed in as</p>
+        <p class="mt-0.5 text-sm font-medium text-slate-100">{{ user.name }}</p>
+        <p class="text-xs text-slate-500">@{{ user.username }}</p>
+      </div>
+      <a href="{{ url_for('dashboard') }}" class="btn-primary w-full py-2.5 text-sm">Go to dashboard</a>
+      {% else %}
+      <div>
+        <a href="{{ url_for('login') }}" class="btn-primary w-full py-2.5 text-sm">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 2.8 5 5.6v5.6c0 4.5 3 8.4 7 9.9 4-1.5 7-5.4 7-9.9V5.6l-7-2.8Z"/>
+            <path d="m8.8 12.2 2.3 2.3 4.2-4.6"/>
+          </svg>
+          Continue with Kavach
+        </a>
+        <p class="mt-2.5 text-center text-xs text-slate-500">
+          Use Windows Hello, Touch ID, or your device PIN.
+        </p>
+      </div>
+
+      <div class="rounded-md border border-line bg-ink/60 p-4">
+        <p class="text-xs font-medium text-slate-200">High-assurance service</p>
+        <p class="mt-1 text-xs leading-relaxed text-slate-500">
+          Citizen services require a direct passkey sign-in. Assisted sign-in is disabled to protect
+          financial records and official certificates.
+        </p>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="border-t border-line px-5 py-3 text-center text-[11px] text-slate-600">
+      OAuth 2.0 · OpenID Connect · PKCE (RFC 7636)
+    </div>
+  </div>
+</div>
+{% endblock %}
