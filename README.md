@@ -474,7 +474,7 @@ Full table and known limits: [`docs/threat-model.md`](docs/threat-model.md).
   <br/>
   <b>Priyanshi Rawat</b>
   <br/>
-  <a href="https://github.com/orgs/VertexTeam-IN/people/avopricado">
+  <a href="https://github.com/avopricado">
     <sub>@avopricado</sub>
   </a>
 </td>
