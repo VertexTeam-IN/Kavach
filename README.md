@@ -467,7 +467,17 @@ Full table and known limits: [`docs/threat-model.md`](docs/threat-model.md).
       </td>
     </tr>
     <tr>
-      <td align="center" width="200"><b>Priyanshi</b></td>
+      <td align="center" width="200">
+  <a href="https://github.com/avopricado">
+    <img src="https://github.com/avopricado.png" width="80" alt="Priyanshi" />
+  </a>
+  <br/>
+  <b>Priyanshi Rawat</b>
+  <br/>
+  <a href="https://github.com/orgs/VertexTeam-IN/people/avopricado">
+    <sub>@avopricado</sub>
+  </a>
+</td>
       <td width="170"><b>Frontend Developer</b></td>
       <td>
         <ul>
